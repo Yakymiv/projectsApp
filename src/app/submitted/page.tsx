@@ -38,11 +38,6 @@ const Submitted = (): JSX.Element => {
     <section
       className={`${spaceGrotesk.className} container mx-auto mt-12 px-4 md:px-0`}
     >
-      <Link href="/">
-        <button className="text-white text-center py-2 px-4 border border-gray-400 rounded shadow w-44 cursor-pointer">
-          Create Project
-        </button>
-      </Link>
       <div className="relative overflow-x-auto mt-5">
         <table className="w-full text-sm text-left border-white border-2 border-opacity-30 text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
