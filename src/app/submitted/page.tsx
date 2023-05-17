@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import { getDocuments } from "@/utils/firestore";
 import Project from "@/interfaces/Project.interface";
 import Link from "next/link";
@@ -12,11 +16,24 @@ interface ProjectData extends Project {
   id: string;
 }
 
-interface SubmittedProps {
-  projectsData: ProjectData[];
-}
+const Submitted = (): JSX.Element => {
+  const [projects, setProjects] = useState<ProjectData[]>([]);
 
-const Submitted: React.FC<SubmittedProps> = ({ projectsData }): JSX.Element => {
+  useEffect(() => {
+    const fetchData = async () => {
+      let projectsData: ProjectData[] = [];
+
+      const snapshot = await getDocuments();
+      snapshot?.forEach((doc) => {
+        projectsData.push({ id: doc.id, ...doc.data() } as ProjectData);
+      });
+
+      setProjects(projectsData);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <section
       className={`${spaceGrotesk.className} container mx-auto mt-12 px-4 md:px-0`}
@@ -54,7 +71,7 @@ const Submitted: React.FC<SubmittedProps> = ({ projectsData }): JSX.Element => {
             </tr>
           </thead>
           <tbody>
-            {projectsData.map((el) => (
+            {projects.map((el) => (
               <tr
                 key={el.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -79,20 +96,5 @@ const Submitted: React.FC<SubmittedProps> = ({ projectsData }): JSX.Element => {
     </section>
   );
 };
-
-export async function getServerSideProps() {
-  const projectsData: ProjectData[] = [];
-
-  const snapshot = await getDocuments();
-  snapshot?.forEach((doc) => {
-    projectsData.push({ id: doc.id, ...doc.data() } as ProjectData);
-  });
-
-  return {
-    props: {
-      projectsData,
-    },
-  };
-}
 
 export default Submitted;
