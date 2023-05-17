@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import { getDocuments } from "@/utils/firestore";
 import Project from "@/interfaces/Project.interface";
-import Link from "next/link";
 import { Space_Grotesk } from "next/font/google";
 
 const spaceGrotesk = Space_Grotesk({
