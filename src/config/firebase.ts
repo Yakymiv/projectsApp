@@ -10,7 +10,10 @@ const firebaseConfig = {
 };
 
 console.log(process.env);
-console.log(process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
+console.log(
+  process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+);
 
 let firebase =
   getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
