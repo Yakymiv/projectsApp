@@ -4,7 +4,10 @@ interface StepsProps {
 
 const Steps: React.FC<StepsProps> = ({ currentStep = 1 }): JSX.Element => {
   return (
-    <aside className="md:w-64 md:shadow-myShadow md:h-screen md:pl-7 pl-0 md:pt-12 pt-20 flex justify-center md:justify-start">
+    <aside
+      id="steps"
+      className="relative md:w-64 md:shadow-rigthShadow md:h-screen md:pl-7 pl-0 md:pt-12 pt-20 flex justify-center md:justify-start"
+    >
       <div className="md:flex-col flex items-center">
         <div className="flex">
           <div

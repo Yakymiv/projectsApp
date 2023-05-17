@@ -1,4 +1,6 @@
-interface ProjectDetailsProps {
+import StepTitles from "./base/StepTitles";
+
+interface StartProjectStepProps {
   name: string;
   setName: (value: string) => void;
   url: string;
@@ -8,7 +10,7 @@ interface ProjectDetailsProps {
   setStep: (value: number) => void;
 }
 
-const ProjectDetails: React.FC<ProjectDetailsProps> = ({
+const StartProjectStep: React.FC<StartProjectStepProps> = ({
   name,
   setName,
   url,
@@ -33,12 +35,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
 
   return (
     <>
-      <h2 className="text-sm md:text-xl text-blue-500 mb-2">
-        To Create Quest you need firstly create Project
-      </h2>
-      <h1 className="text-white mb-6 md:mb-7 font-medium text-3xl">
-        Add New Project
-      </h1>
+      <StepTitles
+        title="To Create Quest you need firstly create Project"
+        subtitle="Add New Project"
+      />
       <label htmlFor="name" className="text-white mb-1 font-medium text-base">
         Project Name (It can be changed later)
       </label>
@@ -47,18 +47,19 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Awesome NFT Punch"
-        className="bg-dark rounded-lg border-2 border-white border-opacity-10 h-12 text-white text-opacity-30 px-4 py-3 max-w-2xl mb-6 md:mb-7"
+        className="bg-dark rounded-lg border-2 text-base border-white border-opacity-10 h-12 text-white px-4 py-3 max-w-2xl mb-6 md:mb-7"
       ></input>
       <label htmlFor="url" className="text-white mb-1 font-medium text-base">
         Project URL (It cannot be changed after creation)
       </label>
       <input
         id="url"
-        value={url}
+        type="url"
+        defaultValue={`alphaguilty.io/${url}`}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Alphaguilty.io/awesomenftpunch"
-        className="bg-dark rounded-lg border-2 border-white border-opacity-10 h-12 text-white text-opacity-30 px-4 py-3 max-w-2xl mb-6 md:mb-7"
-      ></input>
+        className="bg-dark rounded-lg border-2 text-base border-white border-opacity-10 h-12 text-white px-4 py-3 max-w-2xl mb-6 md:mb-7"
+      />
       <label
         htmlFor="category"
         className="text-white mb-1 font-medium text-base"
@@ -66,7 +67,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         Project Category (It cannot be changed after creation)
       </label>
       <div id="category" className="max-w-2xl mb-6 md:mb-3">
-        {tags.map((tag, index) => {
+        {tags.map((tag, index): JSX.Element => {
           if (selectedTag === tag) {
             return (
               <span
@@ -102,4 +103,4 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   );
 };
 
-export default ProjectDetails;
+export default StartProjectStep;
